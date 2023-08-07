@@ -2,27 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 public class FirstPersonCamera : MonoBehaviour
 {
-    [SerializeField]
-    private float Speed;
-    [SerializeField]
-    private float mouseSensitivity;
-    [SerializeField]
-    private float smoothRotation;
+    [SerializeField] private float smoothTime = 0.05f;
+    [SerializeField] private float speed;
 
+    private CharacterController _characterController;
     private PlayerInputs m_PlayerInputs;
-    private CharacterController m_Controller;
-    private Vector2 m_CurrentDirection;
-    private Vector2 m_CurrentVelocity;
+    private float _currentVelocity;
+    private Vector2 _input;
+    private Vector3 _direction;
 
     void Awake()
     {
-        m_Controller = GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = true;
+        Application.targetFrameRate = 140;
+        _characterController = GetComponent<CharacterController>();
         m_PlayerInputs = new PlayerInputs();
+        IsGrounded();
     }
 
     private void OnEnable()
@@ -58,7 +57,7 @@ public class FirstPersonCamera : MonoBehaviour
 
     void Movement()
     {
-        float velocityY =0;
+        float velocityY = 0;
         if (IsGrounded())
         {
             velocityY += 30f * 2f * Time.deltaTime;
@@ -67,13 +66,15 @@ public class FirstPersonCamera : MonoBehaviour
         {
             velocityY = -8f;
         }
-        Vector2 targetDirection = m_PlayerInputs.Player.Move.ReadValue<Vector2>();
-        targetDirection.Normalize();
+       
+        _input = m_PlayerInputs.Player.Move.ReadValue<Vector2>();
+        _direction = new Vector3(_input.x, velocityY, _input.y);
+        if (_input.sqrMagnitude == 0) return;
 
-        m_CurrentDirection = Vector2.SmoothDamp(m_CurrentDirection, targetDirection, ref m_CurrentVelocity, 0.1f);
+        var targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg;
+        var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _currentVelocity, smoothTime);
+        transform.rotation = Quaternion.Euler(0.0f, angle, 0.0f);
 
-        Vector3 velocity = (transform.forward * m_CurrentDirection.y + transform.right * m_CurrentDirection.x) * Speed + Vector3.up * velocityY;
-
-        m_Controller.Move(velocity * Time.deltaTime);
+        _characterController.Move(_direction * speed * Time.deltaTime);
     }
 }
