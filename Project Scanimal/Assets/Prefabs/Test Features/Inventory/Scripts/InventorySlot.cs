@@ -9,6 +9,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
 {
     public Image image;
     public Color selectedColour, notSelectedColour;
+    public int indexNum;
 
     private void Awake()
     {
@@ -32,5 +33,10 @@ public class InventorySlot : MonoBehaviour, IDropHandler
             InventoryItem invItem = droppedItem.GetComponent<InventoryItem>();
             invItem.parentAfterDrag = transform;
         }
+    }
+
+    public void OnSelect(int index)
+    { 
+        InventoryManager.Instance.ChangeSelectedSlot(index);
     }
 }

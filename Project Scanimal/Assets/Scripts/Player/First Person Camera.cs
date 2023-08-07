@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class FirstPersonCamera : MonoBehaviour
@@ -8,6 +9,8 @@ public class FirstPersonCamera : MonoBehaviour
     private float Speed;
     [SerializeField]
     private float mouseSensitivity;
+    [SerializeField]
+    private float smoothRotation;
 
     private PlayerInputs m_PlayerInputs;
     private CharacterController m_Controller;
@@ -34,7 +37,7 @@ public class FirstPersonCamera : MonoBehaviour
 
     void Update()
     {
-        KeybaordMovement();
+        Movement();
         IsGrounded();
     }
 
@@ -53,7 +56,7 @@ public class FirstPersonCamera : MonoBehaviour
         }
     }
 
-    void KeybaordMovement()
+    void Movement()
     {
         float velocityY =0;
         if (IsGrounded())
@@ -70,6 +73,7 @@ public class FirstPersonCamera : MonoBehaviour
         m_CurrentDirection = Vector2.SmoothDamp(m_CurrentDirection, targetDirection, ref m_CurrentVelocity, 0.1f);
 
         Vector3 velocity = (transform.forward * m_CurrentDirection.y + transform.right * m_CurrentDirection.x) * Speed + Vector3.up * velocityY;
+
         m_Controller.Move(velocity * Time.deltaTime);
     }
 }

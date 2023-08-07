@@ -32,7 +32,7 @@ public class InventoryManager : MonoBehaviour
         //implement changing selected slot 
     }
 
-    void ChangeSelectedSlot(int newValue)
+    public void ChangeSelectedSlot(int newValue)
     {
         if (selectedSlot >= 0)
         {
