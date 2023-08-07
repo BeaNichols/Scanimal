@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8867177d3be1db74aa5f2c7b16be00bb, type: 3}
   m_Name: Pick
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: 0c7afb3ab0ea8a74790f6f68bc93c2a5, type: 3}
+  image: {fileID: 21300000, guid: 908d7f991ac02774c8576ddbd965e3d4, type: 3}
   type: 1
   actionType: 1
   stackable: 1
