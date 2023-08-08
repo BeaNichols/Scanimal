@@ -8,7 +8,8 @@ public class Cell
     { 
         Water,
         Ground,
-        Beach
+        Beach,
+        Spawn
     }
 
     public type CurrentType;

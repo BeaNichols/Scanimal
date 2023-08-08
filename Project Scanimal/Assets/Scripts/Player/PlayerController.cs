@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Windows;
 
-public class FirstPersonCamera : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float smoothTime = 0.05f;
     [SerializeField] private float speed;
@@ -15,7 +15,6 @@ public class FirstPersonCamera : MonoBehaviour
     private float _currentVelocity;
     private Vector2 _input;
     private Vector3 _direction;
-
     void Awake()
     {
         Application.targetFrameRate = 140;

@@ -13,8 +13,10 @@ public class ItemSO : ScriptableObject
 
     public enum ItemType
     { 
-        Object,
-        Tool
+        building,
+        Tool,
+        item
+        
     }
 
     public enum ActionType

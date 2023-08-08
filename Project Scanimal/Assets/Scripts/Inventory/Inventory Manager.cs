@@ -13,6 +13,9 @@ public class InventoryManager : MonoBehaviour
 
     private int selectedSlot = -1;
 
+    public delegate void SelectionChanged();
+    public static event SelectionChanged OnSelectionChanged;
+
     private void Awake()
     {
         Instance = this;
@@ -41,6 +44,7 @@ public class InventoryManager : MonoBehaviour
 
         inventorSlots[newValue].Select();
         selectedSlot = newValue;
+        OnSelectionChanged?.Invoke();
     }
 
     public bool AddItem(ItemSO item)

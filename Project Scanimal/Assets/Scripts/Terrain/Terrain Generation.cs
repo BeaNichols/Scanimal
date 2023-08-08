@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Playables;
+using static UnityEditor.Progress;
 
 public class TerrainGeneration : MonoBehaviour
 {
-    public Material terrainMaterial;
-    public int size = 100;
-    public GameObject[] GroundTiles;
-    public GameObject Water;
-    public GameObject Beach;
-    [SerializeField]
-    private GameObject m_TerrainHolder; 
+    public int size;
+
+    [SerializeField] public GameObject[] GroundTiles;
+    [SerializeField] public GameObject Water;
+    [SerializeField] public GameObject Beach;
+    [SerializeField] public GameObject PlayerSpawnTile;
+    [SerializeField] private GameObject m_TerrainHolder; 
+
     Cell[,] grid;
 
     void Start()
@@ -21,7 +24,13 @@ public class TerrainGeneration : MonoBehaviour
         {
             for (int x = 0; x < size; x++)
             {
-                if (IsEdgeTile(x, y))
+                if (findSpawnPlayerTile(x,y))
+                {
+                    Cell cell = new Cell(Cell.type.Spawn);
+                    Debug.Log("hit");
+                    grid[x, y] = cell;
+                }
+                else if (IsEdgeTile(x, y))
                 {
                     Cell cell = new Cell(Cell.type.Water);
                     grid[x, y] = cell;
@@ -31,6 +40,7 @@ public class TerrainGeneration : MonoBehaviour
                     Cell cell = new Cell(Cell.type.Ground);
                     grid[x, y] = cell;
                 }
+
                 if (GetBeachTiles(x, y) == true)
                 {
                     Cell cell = new Cell(Cell.type.Beach);
@@ -48,20 +58,24 @@ public class TerrainGeneration : MonoBehaviour
             for (int x = 0; x < size; x++)
             {
                 Cell cell = grid[x, y];
-                if (cell.CurrentType == Cell.type.Water)
+                switch (cell.CurrentType)
                 {
-                    var cellObject = Instantiate(Water, new Vector3(x, 0 ,y), Quaternion.identity);
-                    cellObject.transform.parent = m_TerrainHolder.transform;
-                }
-                else if(cell.CurrentType == Cell.type.Ground)
-                {
-                    var cellObject = Instantiate(ChoseTile(GroundTiles), new Vector3(x, 0, y), Quaternion.identity);
-                    cellObject.transform.parent = m_TerrainHolder.transform;
-                }
-                else if (cell.CurrentType == Cell.type.Beach)
-                {
-                    var cellObject = Instantiate(Beach, new Vector3(x, 0, y), Quaternion.identity);
-                    cellObject.transform.parent = m_TerrainHolder.transform;
+                    case Cell.type.Water:
+                        var cellObject = Instantiate(Water, new Vector3(x, 0, y), Quaternion.identity);
+                        cellObject.transform.parent = m_TerrainHolder.transform;
+                        break;
+                    case Cell.type.Ground:
+                        var cellObject1 = Instantiate(ChoseTile(GroundTiles), new Vector3(x, 0, y), Quaternion.identity);
+                        cellObject1.transform.parent = m_TerrainHolder.transform;
+                        break;
+                    case Cell.type.Beach:
+                        var cellObject2 = Instantiate(Beach, new Vector3(x, 0, y), Quaternion.identity);
+                        cellObject2.transform.parent = m_TerrainHolder.transform;
+                        break;
+                    case Cell.type.Spawn:
+                        var cellObject3 = Instantiate(PlayerSpawnTile, new Vector3(x, 0, y), Quaternion.identity);
+                        cellObject3.transform.parent = m_TerrainHolder.transform;
+                        break;
                 }
             }
         }
@@ -121,5 +135,19 @@ public class TerrainGeneration : MonoBehaviour
         }
 
         return null;
+    }
+
+    private bool findSpawnPlayerTile(int x, int y)
+    {
+        var spawnTilePos = new int[size/2, size/ 2];
+
+        if (x == size/2)
+        {
+            if (y == size / 2)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
