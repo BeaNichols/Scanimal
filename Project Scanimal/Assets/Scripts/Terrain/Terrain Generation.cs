@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Playables;
-using static UnityEditor.Progress;
 
 public class TerrainGeneration : MonoBehaviour
 {
