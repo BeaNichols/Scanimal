@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour
 {
-    private enum PlayerState
+    public enum PlayerState
     { 
         building,
         breaking,
         standard
     }
     [SerializeField]
-    private PlayerState currentState;
+    public PlayerState currentState;
 
-    public delegate void StateChange();
+    public delegate void StateChange(PlayerState currentState);
     public static event StateChange OnStateChange;
 
     private void OnEnable()
@@ -28,7 +28,7 @@ public class PlayerStateManager : MonoBehaviour
 
     private void Start()
     {
-        currentState = PlayerState.breaking;
+        currentState = PlayerState.standard;
     }
 
     private void CheckCurrentItem()
@@ -54,5 +54,7 @@ public class PlayerStateManager : MonoBehaviour
         {
             currentState = PlayerState.standard;
         }
+
+        OnStateChange?.Invoke(currentState);
     }
 }

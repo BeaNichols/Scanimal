@@ -27,7 +27,6 @@ public class TerrainGeneration : MonoBehaviour
                 if (findSpawnPlayerTile(x,y))
                 {
                     Cell cell = new Cell(Cell.type.Spawn);
-                    Debug.Log("hit");
                     grid[x, y] = cell;
                 }
                 else if (IsEdgeTile(x, y))

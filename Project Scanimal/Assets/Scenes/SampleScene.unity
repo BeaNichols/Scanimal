@@ -6344,31 +6344,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4860647963476226895, guid: 1d2cac55975c08a428bdc59d66427b32, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.20234005
+      value: 0.20234004
       objectReference: {fileID: 0}
     - target: {fileID: 4860647963476226895, guid: 1d2cac55975c08a428bdc59d66427b32, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000016850473
+      value: 0.000000016850473
       objectReference: {fileID: 0}
     - target: {fileID: 4860647963476226895, guid: 1d2cac55975c08a428bdc59d66427b32, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000034815395
+      value: -0.0000000034815395
       objectReference: {fileID: 0}
     - target: {fileID: 4942942623029278866, guid: 1d2cac55975c08a428bdc59d66427b32, type: 3}
       propertyPath: m_Name
       value: Player and Cam
       objectReference: {fileID: 0}
+    - target: {fileID: 6705044085248297556, guid: 1d2cac55975c08a428bdc59d66427b32, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7470007002145698853, guid: 1d2cac55975c08a428bdc59d66427b32, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.20234005
+      value: 0.20234004
       objectReference: {fileID: 0}
     - target: {fileID: 7470007002145698853, guid: 1d2cac55975c08a428bdc59d66427b32, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000016850473
+      value: 0.000000016850473
       objectReference: {fileID: 0}
     - target: {fileID: 7470007002145698853, guid: 1d2cac55975c08a428bdc59d66427b32, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000034815395
+      value: -0.0000000034815395
+      objectReference: {fileID: 0}
+    - target: {fileID: 8748821262394061815, guid: 1d2cac55975c08a428bdc59d66427b32, type: 3}
+      propertyPath: hitRange
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8748821262394061815, guid: 1d2cac55975c08a428bdc59d66427b32, type: 3}
+      propertyPath: rayThickness
+      value: 0.03
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
