@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
+
 public class Breaking : MonoBehaviour
 {
     #region Events
@@ -63,7 +64,10 @@ public class Breaking : MonoBehaviour
         else
         {
             stateEnabled = false;
-            inputManager.SetActive(false);
+            if (inputManager.activeSelf == true)
+            {
+                inputManager.SetActive(false);
+            }
         }
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-1)]
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
@@ -23,16 +24,10 @@ public class InventoryManager : MonoBehaviour
 
     private void Start()
     {
-        ChangeSelectedSlot(0);
         foreach (var item in startItem)
-        { 
+        {
             AddItem(item);
         }
-    }
-
-    private void Update()
-    {
-        //implement changing selected slot 
     }
 
     public void ChangeSelectedSlot(int newValue)
