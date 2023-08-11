@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using ZXing;
+using ZXing.Common;
+using ZXing.QrCode;
 using TMPro;
 
 public class BarcodeReader : MonoBehaviour
@@ -19,16 +21,35 @@ public class BarcodeReader : MonoBehaviour
     private bool isAvaible;
     private WebCamTexture camTexture;
 
+    private ZXing.BarcodeReader barcodeReader;
+
 
     void Start()
     {
         SetUpCamera();
+
+        barcodeReader = new ZXing.BarcodeReader();
+        var barcodeReaderOptions = new DecodingOptions
+        {
+            TryHarder = true,          // Enable additional search algorithms for better accuracy
+            PureBarcode= true,
+            PossibleFormats = new[]    // Specify possible QR code formats to narrow down decoding attempts
+            {
+                BarcodeFormat.UPC_A,
+                BarcodeFormat.UPC_E
+            }
+        };
+        barcodeReader.Options = barcodeReaderOptions;
     }
 
     
     void Update()
     {
         UpdateCameraRender();
+        if (isAvaible)
+        {
+            Scan();
+        }
     }
 
     private void SetUpCamera()
@@ -60,27 +81,29 @@ public class BarcodeReader : MonoBehaviour
 
     public void OnClickScan()
     {
-        Scan();
+        if (isAvaible)
+        {
+            Scan();
+        }
     }
 
     private void Scan()
     {
         try
         {
-            IBarcodeReader barCodeReader = new ZXing.BarcodeReader();
-            Result result = barCodeReader.Decode(camTexture.GetPixels32(), camTexture.width,camTexture.height);
-            if (result != null)
+            if (camTexture.isPlaying)
             {
-                textOut.text = result.Text;
-            }
-            else 
-            {
-                textOut.text = "Failed To Read Code";
+                var color32 = camTexture.GetPixels32();
+                var result = barcodeReader.Decode(color32, camTexture.width, camTexture.height);
+                if (result != null)
+                {
+                    textOut.text = result.Text;
+                }
             }
         }
         catch
         {
-            textOut.text = "Failed To Scan";
+            return;
         }
     }
 
@@ -97,3 +120,4 @@ public class BarcodeReader : MonoBehaviour
         imageBackground.rectTransform.localEulerAngles = new Vector3(0, 0, orientation);
     }
 }
+
