@@ -5,6 +5,11 @@ using UnityEngine;
 [DefaultExecutionOrder(-1)]
 public class InventoryManager : MonoBehaviour
 {
+    #region Events
+    public delegate void SelectionChanged();
+    public static event SelectionChanged OnSelectionChanged;
+    #endregion
+
     public static InventoryManager Instance;
 
     public ItemSO[] startItem;
@@ -13,9 +18,6 @@ public class InventoryManager : MonoBehaviour
     public GameObject inventoryItemPrefab;
 
     private int selectedSlot = -1;
-
-    public delegate void SelectionChanged();
-    public static event SelectionChanged OnSelectionChanged;
 
     private void Awake()
     {

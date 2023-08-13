@@ -7,9 +7,13 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
-public class ContinuousDemo : MonoBehaviour {
-
-	private IScanner BarcodeScanner;
+public class ContinuousDemo : MonoBehaviour 
+{
+    #region Events
+    public delegate bool BarcodeScan(string code);
+    public static event BarcodeScan OnBarcodeScan;
+    #endregion
+    private IScanner BarcodeScanner;
 	public TextMeshProUGUI TextHeader;
 	public RawImage Image;
 	private float RestartTime;
@@ -21,7 +25,8 @@ public class ContinuousDemo : MonoBehaviour {
 		Screen.autorotateToPortraitUpsideDown = false;
 	}
 
-	void Start () {
+	void Start ()
+	{
 		// Create a basic scanner
 		BarcodeScanner = new Scanner();
 		BarcodeScanner.Camera.Play();
@@ -44,7 +49,8 @@ public class ContinuousDemo : MonoBehaviour {
 
 	private void StartScanner()
 	{
-		BarcodeScanner.Scan((barCodeType, barCodeValue) => {
+		BarcodeScanner.Scan((barCodeType, barCodeValue) => 
+		{
 			BarcodeScanner.Stop();
 			if (TextHeader.text.Length > 250)
 			{
@@ -52,9 +58,10 @@ public class ContinuousDemo : MonoBehaviour {
 			}
 			TextHeader.text += "Found: " + barCodeType + " / " + barCodeValue + "\n";
 			RestartTime += Time.realtimeSinceStartup + 1f;
+			OnBarcodeScan?.Invoke(barCodeValue);
 
-			#if UNITY_ANDROID || UNITY_IOS
-			Handheld.Vibrate();
+            #if UNITY_ANDROID || UNITY_IOS
+            Handheld.Vibrate();
 			#endif
 		});
 	}
