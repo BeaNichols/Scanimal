@@ -8,4 +8,9 @@ public class SceneController : MonoBehaviour
     {
         SceneManager.LoadScene("BarcodeScanner");
     }
+
+    public void OnClickBack()
+    {
+        SceneManager.LoadScene("MainSceneTemp");
+    }
 }
