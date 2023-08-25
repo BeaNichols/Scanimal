@@ -17,17 +17,9 @@ namespace BarcodeScanner.Parser
 		{
 			Scanner = new ZXing.BarcodeReader();
 			Scanner.AutoRotate = settings.ParserAutoRotate;
-			Scanner.TryInverted = settings.ParserTryInverted;
 			Scanner.Options.TryHarder = settings.ParserTryHarder;
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="colors"></param>
-		/// <param name="width"></param>
-		/// <param name="height"></param>
-		/// <returns></returns>
 		public ParserResult Decode(Color32[] colors, int width, int height)
 		{
 			if (colors == null || colors.Length == 0 || width == 0 || height == 0)

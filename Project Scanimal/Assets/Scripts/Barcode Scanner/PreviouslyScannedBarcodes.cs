@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class PreviouslyScannedBarcodes : MonoBehaviour
 {
+    #region Events
+    public delegate void FailedScan();
+    public static event FailedScan OnScanFail;
+
+    public delegate void PassScan();
+    public static event PassScan OnScanPass;
+    #endregion
+
     public List<string> previousBarcodes;
 
     private void OnEnable()
@@ -35,12 +43,28 @@ public class PreviouslyScannedBarcodes : MonoBehaviour
 
     private void CheckCodeList(string codeToCheck)
     {
+        bool added = false;
         foreach (var barcode in previousBarcodes)
         {
-            if (barcode == codeToCheck)
+            if (barcode != codeToCheck) 
             {
-                previousBarcodes.Add(codeToCheck);
+                added = true;
             }
+            else if (barcode == codeToCheck)
+            {
+                added = false;
+                break;
+            }
+        }
+
+        if (added)
+        {
+            previousBarcodes.Add(codeToCheck);
+            OnScanPass?.Invoke();
+        }
+        else if (!added)
+        {
+            OnScanFail?.Invoke();
         }
     }
 }

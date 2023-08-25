@@ -15,7 +15,6 @@ public class ContinuousDemo : MonoBehaviour
     #endregion
 
     private IScanner BarcodeScanner;
-	public TextMeshProUGUI TextHeader;
 	public RawImage Image;
 	private float RestartTime;
 
@@ -53,13 +52,14 @@ public class ContinuousDemo : MonoBehaviour
 		BarcodeScanner.Scan((barCodeType, barCodeValue) => 
 		{
 			BarcodeScanner.Stop();
-			if (TextHeader.text.Length > 250)
-			{
-				TextHeader.text = "";
-			}
-			TextHeader.text = "Found";
+			//if (TextHeader.text.Length > 250)
+			//{
+			//	TextHeader.text = "";
+			//}
             RestartTime += Time.realtimeSinceStartup + 1f;
 			OnBarcodeScan?.Invoke(barCodeValue);
+
+			//TextHeader.text = "Found";
 
             #if UNITY_ANDROID || UNITY_IOS
             Handheld.Vibrate();
