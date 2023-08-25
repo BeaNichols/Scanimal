@@ -33,17 +33,14 @@ public class PreviouslyScannedBarcodes : MonoBehaviour
         }
     }
 
-    private bool CheckCodeList(string codeToCheck)
+    private void CheckCodeList(string codeToCheck)
     {
         foreach (var barcode in previousBarcodes)
         {
             if (barcode == codeToCheck)
             {
                 previousBarcodes.Add(codeToCheck);
-                return true;
             }
         }
-        return false;
     }
-
 }

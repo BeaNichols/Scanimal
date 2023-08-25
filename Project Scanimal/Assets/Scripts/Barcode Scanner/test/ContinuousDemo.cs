@@ -10,9 +10,10 @@ using TMPro;
 public class ContinuousDemo : MonoBehaviour 
 {
     #region Events
-    public delegate bool BarcodeScan(string code);
+    public delegate void BarcodeScan(string code);
     public static event BarcodeScan OnBarcodeScan;
     #endregion
+
     private IScanner BarcodeScanner;
 	public TextMeshProUGUI TextHeader;
 	public RawImage Image;
@@ -56,8 +57,8 @@ public class ContinuousDemo : MonoBehaviour
 			{
 				TextHeader.text = "";
 			}
-			TextHeader.text += "Found: " + barCodeType + " / " + barCodeValue + "\n";
-			RestartTime += Time.realtimeSinceStartup + 1f;
+			TextHeader.text = "Found";
+            RestartTime += Time.realtimeSinceStartup + 1f;
 			OnBarcodeScan?.Invoke(barCodeValue);
 
             #if UNITY_ANDROID || UNITY_IOS
@@ -81,22 +82,6 @@ public class ContinuousDemo : MonoBehaviour
 		}
 	}
 
-	#region UI Buttons
-
-	public void ClickBack()
-	{
-		// Try to stop the camera before loading another scene
-		StartCoroutine(StopCamera(() => {
-			SceneManager.LoadScene("Boot");
-		}));
-	}
-
-	/// <summary>
-	/// This coroutine is used because of a bug with unity (http://forum.unity3d.com/threads/closing-scene-with-active-webcamtexture-crashes-on-android-solved.363566/)
-	/// Trying to stop the camera in OnDestroy provoke random crash on Android
-	/// </summary>
-	/// <param name="callback"></param>
-	/// <returns></returns>
 	public IEnumerator StopCamera(Action callback)
 	{
 		// Stop Scanning
@@ -110,5 +95,4 @@ public class ContinuousDemo : MonoBehaviour
 		callback.Invoke();
 	}
 
-	#endregion
 }
