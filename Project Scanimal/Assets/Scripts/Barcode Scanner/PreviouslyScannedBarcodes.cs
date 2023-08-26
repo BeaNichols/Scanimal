@@ -43,28 +43,16 @@ public class PreviouslyScannedBarcodes : MonoBehaviour
 
     private void CheckCodeList(string codeToCheck)
     {
-        bool added = false;
-        foreach (var barcode in previousBarcodes)
-        {
-            if (barcode != codeToCheck) 
-            {
-                added = true;
-            }
-            else if (barcode == codeToCheck)
-            {
-                added = false;
-                break;
-            }
-        }
-
-        if (added)
+        if (!previousBarcodes.Contains(codeToCheck))
         {
             previousBarcodes.Add(codeToCheck);
             OnScanPass?.Invoke();
         }
-        else if (!added)
+        else if (previousBarcodes.Contains(codeToCheck))
         {
             OnScanFail?.Invoke();
         }
+
+        LocalSaveManager.SaveBarcodeSettings(this);
     }
 }

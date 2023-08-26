@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BarcodeScanner.unity
     guid: 5e7abc38d8a842e4f870fcc38a7601d0
+  - enabled: 1
+    path: Assets/Scenes/WalkingScene.unity
+    guid: cc16a6fd789c76f4d850d8c6d06c7f09
   m_configObjects: {}

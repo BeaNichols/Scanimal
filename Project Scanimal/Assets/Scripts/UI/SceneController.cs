@@ -13,4 +13,9 @@ public class SceneController : MonoBehaviour
     {
         SceneManager.LoadScene("MainSceneTemp");
     }
+
+    public void OnClickWalk()
+    {
+        SceneManager.LoadScene("WalkingScene");
+    }
 }
