@@ -7,6 +7,14 @@ using UnityEngine.Windows;
 
 public class PlayerController : MonoBehaviour
 {
+    #region Events
+    public delegate void Move();
+    public static event Move OnMove;
+
+    public delegate void StopMove();
+    public static event StopMove OnStopMove;
+    #endregion
+
     [SerializeField] private float smoothTime = 0.05f;
     [SerializeField] private float speed;
 
@@ -15,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private float _currentVelocity;
     private Vector2 _input;
     private Vector3 _direction;
+
     void Awake()
     {
         Application.targetFrameRate = 140;
@@ -68,8 +77,13 @@ public class PlayerController : MonoBehaviour
        
         _input = m_PlayerInputs.Player.Move.ReadValue<Vector2>();
         _direction = new Vector3(_input.x, velocityY, _input.y);
-        if (_input.sqrMagnitude == 0) return;
+        if (_input.sqrMagnitude == 0)
+        {
+            OnStopMove?.Invoke();
+            return;
+        }
 
+        OnMove?.Invoke();
         var targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg;
         var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _currentVelocity, smoothTime);
         transform.rotation = Quaternion.Euler(0.0f, angle, 0.0f);

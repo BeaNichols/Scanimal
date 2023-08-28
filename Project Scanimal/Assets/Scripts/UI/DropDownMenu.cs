@@ -6,6 +6,7 @@ public class DropDownMenu : MonoBehaviour
 {
     [SerializeField]
     private List<GameObject> DropDownItems = new List<GameObject>();
+    public GameObject CloseButton;
 
     private bool isStateOne = false;
 
@@ -25,6 +26,8 @@ public class DropDownMenu : MonoBehaviour
         { 
             UiObject.SetActive(false);
         }
+        
+        CloseButton.SetActive(false);
     }
 
     public void ToggleAction()
@@ -34,12 +37,14 @@ public class DropDownMenu : MonoBehaviour
             // Perform the second action (opposite of the first)
             OnClickDisable();
             isStateOne = false;
+            CloseButton.SetActive(false);
         }
         else
         {
             // Perform the first action
             OnClickEnable();
             isStateOne = true;
+            CloseButton.SetActive(true);
         }
     }
 
