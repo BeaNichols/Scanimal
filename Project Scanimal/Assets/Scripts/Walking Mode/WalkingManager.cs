@@ -1,11 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Windows;
 using Wizcorp.Utils.Logger;
 
 public class WalkingManager : MonoBehaviour
 {
+    #region Events
+    public delegate void Move(float vel);
+    public static event Move OnMove;
+    #endregion
+
     private double previousLat;
     private double previousLon;
     private double currentLat;
@@ -35,6 +42,11 @@ public class WalkingManager : MonoBehaviour
         currentLon = 0;
     }
 
+    private void Update()
+    {
+ 
+    }
+
     private void LocationChange(double lat, double lon)
     {
         if (previousLat == 0 && previousLon == 0)
@@ -51,13 +63,13 @@ public class WalkingManager : MonoBehaviour
         currentLon = lon;
 
         distanceMoved = distanceMoved + CalculateDistance(currentLat, currentLon, previousLat, previousLon);
-
         distanceText.text = distanceMoved.ToString() + " kilometers";
     }
 
     // Calculate the distance between two GPS coordinates using the Haversine formula
     private double CalculateDistance(double lat1, double lon1, double lat2, double lon2)
     {
+        OnMove?.Invoke(0.5f);
         double radius = 6371; // Earth's radius in kilometers
 
         // Convert latitude and longitude from degrees to radians
@@ -74,4 +86,24 @@ public class WalkingManager : MonoBehaviour
 
         return distance;
     }
+
+    //private bool CalculateDifferance(double lat1, double lon1, double lat2, double lon2, float threshold)
+    //{
+    //    double latDifference = lat2 - lat1;
+    //    double lonDifference = lon2 - lon1;
+
+    //    // Check if the absolute differences are within the threshold
+    //    if (Mathf.Abs((float)latDifference) < threshold && Mathf.Abs((float)lonDifference) < threshold)
+    //    {
+    //        Debug.Log("Location differences are within the threshold.");
+    //        largeEnoughCheck.text = "too small";
+    //        return false;
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("Location differences are too large.");
+    //        largeEnoughCheck.text = "Moved";
+    //        return true;
+    //    }
+    //}
 }

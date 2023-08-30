@@ -29,7 +29,7 @@ public class PlayerGps : MonoBehaviour
             yield break;
         }
 
-        Input.location.Start();
+        Input.location.Start(5, 20);
 
         int maxWait = 20;
 

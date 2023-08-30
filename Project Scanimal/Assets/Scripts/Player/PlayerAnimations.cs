@@ -10,12 +10,16 @@ public class PlayerAnimations : MonoBehaviour
     {
         PlayerController.OnMove += Walk;
         PlayerController.OnStopMove += StopWalk;
+
+        WalkingManager.OnMove += Walk;
     }
 
     private void OnDisable()
     {
         PlayerController.OnMove -= Walk;
         PlayerController.OnStopMove -= StopWalk;
+
+        WalkingManager.OnMove -= Walk;
     }
 
     private void Start()
