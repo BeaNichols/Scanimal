@@ -8,10 +8,10 @@ using UnityEngine.Windows;
 public class PlayerController : MonoBehaviour
 {
     #region Events
-    public delegate void Move();
+    public delegate void Move(float vel);
     public static event Move OnMove;
 
-    public delegate void StopMove();
+    public delegate void StopMove(float vel);
     public static event StopMove OnStopMove;
     #endregion
 
@@ -79,11 +79,11 @@ public class PlayerController : MonoBehaviour
         _direction = new Vector3(_input.x, velocityY, _input.y);
         if (_input.sqrMagnitude == 0)
         {
-            OnStopMove?.Invoke();
+            OnStopMove?.Invoke(_input.sqrMagnitude);
             return;
         }
 
-        OnMove?.Invoke();
+        OnMove?.Invoke(_input.sqrMagnitude);
         var targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg;
         var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _currentVelocity, smoothTime);
         transform.rotation = Quaternion.Euler(0.0f, angle, 0.0f);

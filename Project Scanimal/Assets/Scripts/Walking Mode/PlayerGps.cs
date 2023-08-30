@@ -6,12 +6,14 @@ using UnityEngine.Android;
 
 public class PlayerGps : MonoBehaviour
 {
+    #region Events
+    public delegate void Location(double lat, double lon);
+    public static event Location OnLocationChange;
+    #endregion
+
     public TextMeshProUGUI GPSStatus;
     public TextMeshProUGUI latitudeValue;
     public TextMeshProUGUI longitudeValue;
-    public TextMeshProUGUI altitudeValue;
-    public TextMeshProUGUI horizontalAccuracy;
-    public TextMeshProUGUI timeStampValue;
 
     private void Start()
     {
@@ -64,16 +66,12 @@ public class PlayerGps : MonoBehaviour
             GPSStatus.text = "Location Found";
             latitudeValue.text = Input.location.lastData.latitude.ToString();
             longitudeValue.text = Input.location.lastData.longitude.ToString();
-            altitudeValue.text = Input.location.lastData.altitude.ToString();
-            horizontalAccuracy.text = Input.location.lastData.horizontalAccuracy.ToString();
-            timeStampValue.text = Input.location.lastData.timestamp.ToString();
+            OnLocationChange?.Invoke(Input.location.lastData.latitude, Input.location.lastData.longitude);
         }
-        else 
+        else
         {
             //service stopped
             GPSStatus.text = "Location Stopped";
         }
     }
-
-
 }

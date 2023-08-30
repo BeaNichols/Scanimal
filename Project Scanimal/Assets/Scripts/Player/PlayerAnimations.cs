@@ -23,14 +23,15 @@ public class PlayerAnimations : MonoBehaviour
         m_Animator = GetComponentInChildren<Animator>();
     }
 
-    private void Walk()
+    private void Walk(float vel)
     {
-        m_Animator.SetBool("IsWalking", true);
+        //m_Animator.SetBool("IsWalking", true);
+        m_Animator.SetFloat("Velocity", vel);
     }
 
-    private void StopWalk()
+    private void StopWalk(float vel)
     {
-        m_Animator.SetBool("IsWalking", false);
+        m_Animator.SetFloat("Velocity", vel);
     }
 
 }
