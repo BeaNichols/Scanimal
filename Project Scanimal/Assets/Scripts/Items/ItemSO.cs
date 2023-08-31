@@ -11,6 +11,8 @@ public class ItemSO : ScriptableObject
     public ActionType actionType;
     public bool stackable = true;
 
+    public GameObject PlaceableItem;
+
     public enum ItemType
     { 
         building,

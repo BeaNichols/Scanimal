@@ -40,6 +40,8 @@ public class WalkingManager : MonoBehaviour
 
         currentLat = 0;
         currentLon = 0;
+
+        OnMove?.Invoke(0.5f);
     }
 
     private void Update()
@@ -69,7 +71,6 @@ public class WalkingManager : MonoBehaviour
     // Calculate the distance between two GPS coordinates using the Haversine formula
     private double CalculateDistance(double lat1, double lon1, double lat2, double lon2)
     {
-        OnMove?.Invoke(0.5f);
         double radius = 6371; // Earth's radius in kilometers
 
         // Convert latitude and longitude from degrees to radians
