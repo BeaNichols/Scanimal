@@ -62,6 +62,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Tap"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""ec0d94f2-5fc7-45cd-90b3-318b41392acf"",
+                    ""expectedControlType"": ""Touch"",
+                    ""processors"": """",
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -108,6 +117,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""PrimaryPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""adf2215a-e063-4f38-a3bb-4c2faddc7a24"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -120,6 +140,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
         m_Player_PrimaryContact = m_Player.FindAction("PrimaryContact", throwIfNotFound: true);
         m_Player_PrimaryPosition = m_Player.FindAction("PrimaryPosition", throwIfNotFound: true);
+        m_Player_Tap = m_Player.FindAction("Tap", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -185,6 +206,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Zoom;
     private readonly InputAction m_Player_PrimaryContact;
     private readonly InputAction m_Player_PrimaryPosition;
+    private readonly InputAction m_Player_Tap;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
@@ -193,6 +215,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
         public InputAction @PrimaryContact => m_Wrapper.m_Player_PrimaryContact;
         public InputAction @PrimaryPosition => m_Wrapper.m_Player_PrimaryPosition;
+        public InputAction @Tap => m_Wrapper.m_Player_Tap;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -214,6 +237,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @PrimaryPosition.started += instance.OnPrimaryPosition;
             @PrimaryPosition.performed += instance.OnPrimaryPosition;
             @PrimaryPosition.canceled += instance.OnPrimaryPosition;
+            @Tap.started += instance.OnTap;
+            @Tap.performed += instance.OnTap;
+            @Tap.canceled += instance.OnTap;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -230,6 +256,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @PrimaryPosition.started -= instance.OnPrimaryPosition;
             @PrimaryPosition.performed -= instance.OnPrimaryPosition;
             @PrimaryPosition.canceled -= instance.OnPrimaryPosition;
+            @Tap.started -= instance.OnTap;
+            @Tap.performed -= instance.OnTap;
+            @Tap.canceled -= instance.OnTap;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -253,5 +282,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnZoom(InputAction.CallbackContext context);
         void OnPrimaryContact(InputAction.CallbackContext context);
         void OnPrimaryPosition(InputAction.CallbackContext context);
+        void OnTap(InputAction.CallbackContext context);
     }
 }

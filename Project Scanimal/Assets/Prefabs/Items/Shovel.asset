@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shovel
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 4ea4091b71f91b0498685ffe948e0416, type: 3}
-  type: 0
+  type: 1
   actionType: 1
   stackable: 0
   PlaceableItem: {fileID: 0}

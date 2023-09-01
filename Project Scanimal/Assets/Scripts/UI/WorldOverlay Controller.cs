@@ -6,6 +6,10 @@ using UnityEngine.UI;
 public class WorldOverlayController : MonoBehaviour
 {
     private Canvas worldCanvas;
+    public ItemSO ItemDrop;
+
+    private BoxCollider boxCollider;
+    public bool colliding;
 
     private void OnEnable()
     {
@@ -21,6 +25,8 @@ public class WorldOverlayController : MonoBehaviour
     {
         worldCanvas = GetComponentInChildren<Canvas>();
         worldCanvas.gameObject.SetActive(false);
+        boxCollider = GetComponent<BoxCollider>();
+        colliding = false;
     }
 
     public void EnableCanvas()
@@ -31,5 +37,21 @@ public class WorldOverlayController : MonoBehaviour
     public void DisableCanvas() 
     {
         worldCanvas.gameObject.SetActive(false);
+    }
+
+    void OnCollisionEnter(Collision collisionInfo)
+    {
+        if (collisionInfo.gameObject.tag == "Item")
+        { 
+            colliding = true;
+        }
+    }
+
+    void OnCollisionExit(Collision collisionInfo)
+    {
+        if (collisionInfo.gameObject.tag == "Item")
+        {
+            colliding = false;
+        }
     }
 }

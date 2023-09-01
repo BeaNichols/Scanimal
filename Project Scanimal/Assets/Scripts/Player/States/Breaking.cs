@@ -20,7 +20,6 @@ public class Breaking : MonoBehaviour
 
     private bool stateEnabled;
     private GameObject currentObject;
-    private GameObject inputManager;
     private int hitAmount;
     private bool Swiped = false;
 
@@ -39,8 +38,6 @@ public class Breaking : MonoBehaviour
 
     private void Start()
     {
-        inputManager = GameObject.Find("InputManager");
-        inputManager.SetActive(false);
         stateEnabled = false;
         currentObject = null;
         hitAmount = 0;
@@ -59,15 +56,10 @@ public class Breaking : MonoBehaviour
         if (currentState == PlayerStateManager.PlayerState.breaking)
         {
             stateEnabled = true;
-            inputManager.SetActive(true);
         }
         else
         {
             stateEnabled = false;
-            if (inputManager.activeSelf == true)
-            {
-                inputManager.SetActive(false);
-            }
         }
     }
 
@@ -136,8 +128,10 @@ public class Breaking : MonoBehaviour
         }
         else if (hitAmount >= 3)
         {
+            var worldController = currentObject.GetComponent<WorldOverlayController>();
+            ItemSO Drop = worldController.ItemDrop;
             Destroy(currentObject);
-            InventoryManager.Instance.AddItem(item);
+            InventoryManager.Instance.AddItem(Drop);
         }
     }
 

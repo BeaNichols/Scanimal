@@ -12,11 +12,11 @@ public class DemoItemPickUp : MonoBehaviour
        bool result = inventoryManager.AddItem(itemsToPickup[id]);
         if (result)
         {
-            Debug.Log("Item Added");
+            //Debug.Log("Item Added");
         }
         else
         {
-            Debug.Log("Item Not Added");
+            //Debug.Log("Item Not Added");
         }
     }
 }

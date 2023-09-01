@@ -10,6 +10,12 @@ public class InputManager : Singleton<InputManager>
 
     public delegate void EndTouch(Vector2 position, float time);
     public event EndTouch OnEndTouch;
+
+    public delegate void StartTapScreen(Vector2 pos);
+    public event StartTapScreen OnStartTap;
+
+    public delegate void EndTapScreen();
+    public event EndTapScreen OnEndTap;
     #endregion
 
     private PlayerInputs playerControls;
@@ -34,6 +40,9 @@ public class InputManager : Singleton<InputManager>
     {
         playerControls.Player.PrimaryContact.started += ctx => StartTouchPrimary(ctx);
         playerControls.Player.PrimaryContact.canceled += ctx => EndTouchPrimary(ctx);
+
+        playerControls.Player.Tap.started += ctx => StartTap(ctx);
+        playerControls.Player.Tap.canceled += ctx => EndTap(ctx);
     }
 
     private void StartTouchPrimary(InputAction.CallbackContext context)
@@ -55,5 +64,15 @@ public class InputManager : Singleton<InputManager>
     public Vector2 PrimaryPosition()
     {
         return Utils.ScreenToWorld(mainCam, playerControls.Player.PrimaryPosition.ReadValue<Vector2>());
+    }
+
+    public void StartTap(InputAction.CallbackContext context)
+    {
+        OnStartTap?.Invoke(playerControls.Player.PrimaryPosition.ReadValue<Vector2>());
+    }
+
+    public void EndTap(InputAction.CallbackContext context)
+    {
+        OnEndTap?.Invoke();
     }
 }

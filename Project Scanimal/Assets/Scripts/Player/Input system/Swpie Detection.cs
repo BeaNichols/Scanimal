@@ -7,6 +7,9 @@ public class SwpieDetection : Singleton<SwpieDetection>
     #region Events
     public delegate void Swipe();
     public static event Swipe OnSwipe;
+
+    public delegate void Tap();
+    public static event Tap OnTap;
     #endregion
     [SerializeField]
     private float minDistance = 0.2f;
@@ -44,12 +47,18 @@ public class SwpieDetection : Singleton<SwpieDetection>
     {
         inputManager.OnStartTouch += SwipeStart;
         inputManager.OnEndTouch += SwipeEnd;
+
+        inputManager.OnStartTap += StartTap;
+        inputManager.OnEndTap += EndTap;
     }
 
     private void OnDisable()
     {
         inputManager.OnStartTouch -= SwipeStart;
         inputManager.OnEndTouch -= SwipeEnd;
+
+        inputManager.OnStartTap -= StartTap;
+        inputManager.OnEndTap -= EndTap;
     }
 
     private void SwipeStart(Vector2 position, float time)
@@ -95,9 +104,21 @@ public class SwpieDetection : Singleton<SwpieDetection>
         }
         else if (Vector2.Dot(Vector2.right, direction) > directionThresshold)
         {
-            Debug.Log("right");
             currentDirection = swipeDirection.right;
             OnSwipe?.Invoke();
         }
+    }
+
+    private void StartTap(Vector2 pos)
+    {
+        if (pos.y <  Screen.height / 1.2)
+        {
+            OnTap?.Invoke();
+        }
+    }
+
+    private void EndTap()
+    {
+
     }
 }
