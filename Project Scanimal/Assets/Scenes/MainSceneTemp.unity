@@ -7252,7 +7252,7 @@ PrefabInstance:
     - target: {fileID: 6067142346525978998, guid: cc766723310cd994ca4e6323225c87fb, type: 3}
       propertyPath: startItem.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 8ef077d6d4a5b9b4ebe8d0bb72fd496d, type: 2}
+      objectReference: {fileID: 11400000, guid: 6d3f7b0a81880e5468936444c51dc5f4, type: 2}
     - target: {fileID: 6067142346525978998, guid: cc766723310cd994ca4e6323225c87fb, type: 3}
       propertyPath: inventorSlots.Array.data[0]
       value: 
