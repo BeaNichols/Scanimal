@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        Application.targetFrameRate = 140;
         _characterController = GetComponent<CharacterController>();
         m_PlayerInputs = new PlayerInputs();
         IsGrounded();

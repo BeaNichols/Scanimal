@@ -2,10 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static PlayerStateManager;
 
 public class BarcodeHandler : MonoBehaviour
 {
+    #region Events
+    public delegate void ScanPass();
+    public static event ScanPass OnScanPass;
+    #endregion
+
     public TextMeshProUGUI TextHeader;
+    public ItemSO item;
 
     private void OnEnable()
     {
@@ -26,7 +33,7 @@ public class BarcodeHandler : MonoBehaviour
 
     private void ScanPassed()
     {
-        TextHeader.text = "Found Scan";
+        OnScanPass?.Invoke();
     }
 
 }

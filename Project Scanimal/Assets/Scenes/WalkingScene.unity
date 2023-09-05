@@ -1722,22 +1722,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7940438724183564946, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
---- !u!114 &1074722120 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3370860816979128879, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-  m_PrefabInstance: {fileID: 1074722119}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4c5b511909ce17478380c5bffb0663b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1097310098
 GameObject:
   m_ObjectHideFlags: 0
@@ -2786,9 +2779,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1074722120}
+      - m_Target: {fileID: 3370860816979128879, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
         m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
-        m_MethodName: OnClickBack
+        m_MethodName: OnClickMainScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

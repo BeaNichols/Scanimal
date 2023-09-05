@@ -300,6 +300,7 @@ GameObject:
   - component: {fileID: 275461919}
   - component: {fileID: 275461918}
   - component: {fileID: 275461920}
+  - component: {fileID: 275461921}
   m_Layer: 0
   m_Name: BarCodeManager
   m_TagString: Untagged
@@ -333,7 +334,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &275461920
 MonoBehaviour:
@@ -347,6 +348,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 299cc5bc7dbaa404da05a4692ad8e7fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TextHeader: {fileID: 443522553}
+  item: {fileID: 11400000, guid: 8ef077d6d4a5b9b4ebe8d0bb72fd496d, type: 2}
+--- !u!114 &275461921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275461917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a59cc3133b2cf7047a782f7553213660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropRate: 64000000320000001e0000000a000000
+  currentLootTable: {fileID: 11400000, guid: 499ab30b0a3f87a4b95e64774cf7daf4, type: 2}
   TextHeader: {fileID: 443522553}
 --- !u!1 &443522550
 GameObject:
@@ -758,78 +775,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
---- !u!1001 &1035764647
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3305592796995129256, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3305592796995129256, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 693.0502
-      objectReference: {fileID: 0}
-    - target: {fileID: 3305592796995129256, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1256.7842
-      objectReference: {fileID: 0}
-    - target: {fileID: 3305592796995129256, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.38518
-      objectReference: {fileID: 0}
-    - target: {fileID: 3305592796995129256, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3305592796995129256, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3305592796995129256, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3305592796995129256, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3305592796995129256, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3305592796995129256, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3305592796995129256, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7940438724183564946, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_Name
-      value: SceneManager
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
---- !u!114 &1035764648 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3370860816979128879, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-  m_PrefabInstance: {fileID: 1035764647}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4c5b511909ce17478380c5bffb0663b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1322729837
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,7 +1014,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8270677646746143043, guid: a025837b45935a147b57dd04d25943ed, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8270677646746143043, guid: a025837b45935a147b57dd04d25943ed, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1350,9 +1295,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1035764648}
+      - m_Target: {fileID: 3370860816979128879, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
         m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
-        m_MethodName: OnClickBack
+        m_MethodName: OnClickCloseScanScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1410,34 +1355,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1917938734}
   - component: {fileID: 1917938733}
-  - component: {fileID: 1917938732}
+  - component: {fileID: 1917938735}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1917938732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917938731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
+  m_IsActive: 0
 --- !u!114 &1917938733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1468,3 +1393,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1917938735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917938731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
