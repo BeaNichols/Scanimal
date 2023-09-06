@@ -1224,6 +1224,7 @@ GameObject:
   - component: {fileID: 1871200949}
   - component: {fileID: 1871200948}
   - component: {fileID: 1871200947}
+  - component: {fileID: 1871200950}
   m_Layer: 5
   m_Name: Return Button
   m_TagString: Untagged
@@ -1295,16 +1296,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3370860816979128879, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
-        m_MethodName: OnClickCloseScanScene
-        m_Mode: 1
+      - m_Target: {fileID: 1871200950}
+        m_TargetAssemblyTypeName: ChangeSceneButton, Assembly-CSharp
+        m_MethodName: UnloadScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: BarcodeScanner
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1871200948
@@ -1345,6 +1346,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1871200945}
   m_CullTransparentMesh: 1
+--- !u!114 &1871200950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871200945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca47ff990a2872e4d8226b890bcccfb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1917938731
 GameObject:
   m_ObjectHideFlags: 0
@@ -1362,7 +1375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1917938733
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1302,17 +1302,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 405632309}
   m_CullTransparentMesh: 1
---- !u!114 &422842060 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3370860816979128879, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-  m_PrefabInstance: {fileID: 4986203273858425019}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4c5b511909ce17478380c5bffb0663b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &424004784 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7598656875944624972, guid: 1fb89e702ebc22f46b982cafcdf11bb8, type: 3}
@@ -1500,6 +1489,7 @@ GameObject:
   - component: {fileID: 509963774}
   - component: {fileID: 509963773}
   - component: {fileID: 509963772}
+  - component: {fileID: 509963775}
   m_Layer: 5
   m_Name: Open Walk
   m_TagString: Untagged
@@ -1571,16 +1561,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 422842060}
-        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
-        m_MethodName: OnClickWalk
-        m_Mode: 1
+      - m_Target: {fileID: 509963775}
+        m_TargetAssemblyTypeName: ChangeSceneButton, Assembly-CSharp
+        m_MethodName: ChangeScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: WalkingScene
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &509963773
@@ -1621,6 +1611,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 509963770}
   m_CullTransparentMesh: 1
+--- !u!114 &509963775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509963770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca47ff990a2872e4d8226b890bcccfb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &573652615 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7598656875944624972, guid: 1fb89e702ebc22f46b982cafcdf11bb8, type: 3}
@@ -3727,6 +3729,7 @@ GameObject:
   - component: {fileID: 1158458775}
   - component: {fileID: 1158458774}
   - component: {fileID: 1158458773}
+  - component: {fileID: 1158458776}
   m_Layer: 5
   m_Name: Open Barcode
   m_TagString: Untagged
@@ -3798,16 +3801,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 422842060}
-        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
-        m_MethodName: OnClickScanScene
-        m_Mode: 1
+      - m_Target: {fileID: 1158458776}
+        m_TargetAssemblyTypeName: ChangeSceneButton, Assembly-CSharp
+        m_MethodName: ChangeSceneAdditive
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: BarcodeScanner
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1158458774
@@ -3848,6 +3851,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1158458771}
   m_CullTransparentMesh: 1
+--- !u!114 &1158458776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158458771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca47ff990a2872e4d8226b890bcccfb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1168454456 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7598656875944624972, guid: 1fb89e702ebc22f46b982cafcdf11bb8, type: 3}
@@ -6905,67 +6920,6 @@ PrefabInstance:
       addedObject: {fileID: 287905882}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d2cac55975c08a428bdc59d66427b32, type: 3}
---- !u!1001 &4986203273858425019
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3305592796995129256, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_RootOrder
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 3305592796995129256, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 693.0502
-      objectReference: {fileID: 0}
-    - target: {fileID: 3305592796995129256, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1256.7842
-      objectReference: {fileID: 0}
-    - target: {fileID: 3305592796995129256, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.38518
-      objectReference: {fileID: 0}
-    - target: {fileID: 3305592796995129256, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3305592796995129256, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3305592796995129256, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3305592796995129256, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3305592796995129256, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3305592796995129256, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3305592796995129256, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7940438724183564946, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
-      propertyPath: m_Name
-      value: SceneManager
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: cd7e5de0dc14bfa42858fb59905ffe63, type: 3}
 --- !u!1001 &5027569349790349137
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7142,7 +7096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8270677646746143043, guid: a025837b45935a147b57dd04d25943ed, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 8270677646746143043, guid: a025837b45935a147b57dd04d25943ed, type: 3}
       propertyPath: m_LocalPosition.x
