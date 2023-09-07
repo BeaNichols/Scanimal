@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CommonItems:
   - {fileID: 11400000, guid: 2b6bdc81b6d47dc4c8b3176b9fe02c71, type: 2}
+  - {fileID: 11400000, guid: b4b7eefcb8e4c0548b1f73a5ad21a4a4, type: 2}
   RareItems:
   - {fileID: 11400000, guid: 8ef077d6d4a5b9b4ebe8d0bb72fd496d, type: 2}
   EpicItems:
