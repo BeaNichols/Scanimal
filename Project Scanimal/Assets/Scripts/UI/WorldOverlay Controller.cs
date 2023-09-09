@@ -54,4 +54,20 @@ public class WorldOverlayController : MonoBehaviour
             colliding = false;
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Item")
+        {
+            colliding = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Item")
+        {
+            colliding = false;
+        }
+    }
 }

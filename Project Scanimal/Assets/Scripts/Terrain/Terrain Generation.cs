@@ -1,28 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class TerrainGeneration : MonoBehaviour
 {
     public int size;
 
-    [SerializeField] public GameObject[] GroundTiles;
-    [SerializeField] public GameObject Water;
-    [SerializeField] public GameObject Beach;
-    [SerializeField] public GameObject PlayerSpawnTile;
-    [SerializeField] private GameObject m_TerrainHolder; 
+    public GameObject[] GroundTiles;
+    public GameObject Water;
+    public GameObject Beach;
+    public GameObject PlayerSpawnTile;
+    [SerializeField] private GameObject m_TerrainHolder;
+    [SerializeField] private GameObject treePrefab;
+    [SerializeField] private GameObject RockPrefab;
+    [SerializeField] private GameObject FlowerPrefab;
 
-    Cell[,] grid;
+    public float NoiseScale = .05f;
+    public float treeDensity = .5f;
+    public float RockDensity = .5f;
+    public float FlowerDensity = .5f;
+
+    public Cell[,] grid;
+    public Cell[,] SavedGrid;
 
     void Start()
+    {
+        SetUpGrid();
+    }
+
+    private void SetUpGrid()
     {
         grid = new Cell[size, size];
         for (int y = 0; y < size; y++)
         {
             for (int x = 0; x < size; x++)
             {
-                if (findSpawnPlayerTile(x,y))
+                if (findSpawnPlayerTile(x, y))
                 {
                     Cell cell = new Cell(Cell.type.Spawn);
                     grid[x, y] = cell;
@@ -46,9 +62,10 @@ public class TerrainGeneration : MonoBehaviour
             }
         }
         DrawTerrainObject(grid);
+        GenerateTrees(grid);
     }
 
-    void DrawTerrainObject(Cell[,] grid)
+    private void DrawTerrainObject(Cell[,] grid)
     {
         for (int y = 0; y < size; y++)
         {
@@ -146,5 +163,91 @@ public class TerrainGeneration : MonoBehaviour
             }
         }
         return false;
+    }
+
+    private void GenerateTrees(Cell[,] grid)
+    {
+        float[,] noiseMap = new float[size, size];
+        (float xOffset, float yOffset) = (Random.Range(-10000f, 10000f), Random.Range(-10000f, 10000f));
+        for (int y = 0; y < size; y++)
+        {
+            for (int x = 0; x < size; x++)
+            {
+                float noiseValue = Mathf.PerlinNoise(x * NoiseScale + xOffset, y * NoiseScale + yOffset);
+                noiseMap[x, y] = noiseValue;
+            }
+        }
+
+        for (int y = 0; y < size; y++)
+        {
+            for (int x = 0; x < size; x++)
+            {
+                Cell cell = grid[x, y];
+                if (cell.CurrentType != Cell.type.Water && cell.CurrentType != Cell.type.Beach)
+                {
+                    float T = Random.Range(0f, treeDensity);
+                    if (noiseMap[x, y] < T)
+                    {
+                        GameObject prefab = treePrefab;
+                        GameObject tree = Instantiate(prefab, transform);
+                        tree.transform.position = new Vector3(x + Random.Range(-0.5f, 0.5f), 0.25f, y + Random.Range(-0.5f, .5f));
+                        tree.transform.parent = m_TerrainHolder.transform;
+                        WorldOverlayController treeCon = tree.GetComponent<WorldOverlayController>();
+                        if (treeCon.colliding)
+                        {
+                            Destroy(tree);
+                        }
+                    }
+
+                    float R = Random.Range(0f, RockDensity);
+                    if (noiseMap[x, y] < R)
+                    {
+                        GameObject prefab = RockPrefab;
+                        GameObject rock = Instantiate(prefab, transform);
+                        rock.transform.position = new Vector3(x + Random.Range(-0.5f, 0.5f), 0, y + Random.Range(-0.5f, .5f));
+                        rock.transform.parent = m_TerrainHolder.transform;
+                        WorldOverlayController rockCon = rock.GetComponent<WorldOverlayController>();
+                        if (rockCon.colliding)
+                        {
+                            Destroy(rock);
+                        }
+                    }
+
+                    float F = Random.Range(0f, FlowerDensity);
+                    if (noiseMap[x, y] < F)
+                    {
+                        GameObject prefab = FlowerPrefab;
+                        GameObject flower = Instantiate(prefab, transform);
+                        flower.transform.position = new Vector3(x + Random.Range(-0.5f, 0.5f), 0, y + Random.Range(-0.5f, .5f));
+                        flower.transform.parent = m_TerrainHolder.transform;
+                        WorldOverlayController flowerCon = flower.GetComponent<WorldOverlayController>();
+                        if (flowerCon.colliding)
+                        {
+                            Destroy(flower);
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+    public void OnClickRegenTerrain()
+    {
+        foreach (Transform child in m_TerrainHolder.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        SetUpGrid();
+    }
+
+    public void LoadSavedMap()
+    {
+        foreach (Transform child in m_TerrainHolder.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        DrawTerrainObject(SavedGrid);
     }
 }
