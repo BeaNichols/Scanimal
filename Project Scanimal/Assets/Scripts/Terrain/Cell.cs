@@ -8,6 +8,9 @@ public class Cell
     { 
         Water,
         Ground,
+        Ground1,
+        Ground2,
+        Ground3,
         Beach,
         Spawn
     }

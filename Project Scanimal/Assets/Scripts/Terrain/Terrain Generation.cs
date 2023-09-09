@@ -26,6 +26,9 @@ public class TerrainGeneration : MonoBehaviour
     public Cell[,] grid;
     public Cell[,] SavedGrid;
 
+    public List<Foliage> foliage;
+    public List<Foliage> savedFoliage;
+
     void Start()
     {
         SetUpGrid();
@@ -50,7 +53,7 @@ public class TerrainGeneration : MonoBehaviour
                 }
                 else if (!IsEdgeTile(x, y))
                 {
-                    Cell cell = new Cell(Cell.type.Ground);
+                    Cell cell = ChoseGround(x, y);
                     grid[x, y] = cell;
                 }
 
@@ -62,7 +65,7 @@ public class TerrainGeneration : MonoBehaviour
             }
         }
         DrawTerrainObject(grid);
-        GenerateTrees(grid);
+        GenerateFoliage(grid);
     }
 
     private void DrawTerrainObject(Cell[,] grid)
@@ -79,8 +82,20 @@ public class TerrainGeneration : MonoBehaviour
                         cellObject.transform.parent = m_TerrainHolder.transform;
                         break;
                     case Cell.type.Ground:
-                        var cellObject1 = Instantiate(ChoseTile(GroundTiles), new Vector3(x, 0, y), Quaternion.identity);
-                        cellObject1.transform.parent = m_TerrainHolder.transform;
+                        var Ground = Instantiate(GroundTiles[0], new Vector3(x, 0, y), Quaternion.identity);
+                        Ground.transform.parent = m_TerrainHolder.transform;
+                        break;
+                    case Cell.type.Ground1:
+                        var Ground1 = Instantiate(GroundTiles[1], new Vector3(x, 0, y), Quaternion.identity);
+                        Ground1.transform.parent = m_TerrainHolder.transform;
+                        break;
+                    case Cell.type.Ground2:
+                        var Ground2 = Instantiate(GroundTiles[2], new Vector3(x, 0, y), Quaternion.identity);
+                        Ground2.transform.parent = m_TerrainHolder.transform;
+                        break;
+                    case Cell.type.Ground3:
+                        var Ground3 = Instantiate(GroundTiles[3], new Vector3(x, 0, y), Quaternion.identity);
+                        Ground3.transform.parent = m_TerrainHolder.transform;
                         break;
                     case Cell.type.Beach:
                         var cellObject2 = Instantiate(Beach, new Vector3(x, 0, y), Quaternion.identity);
@@ -128,24 +143,24 @@ public class TerrainGeneration : MonoBehaviour
         return false;
     }
 
-    private GameObject ChoseTile(GameObject[] ObjectList)
+    private Cell ChoseGround(int x, int y)
     {
         float RandomTileNum = Random.Range(1, 100);
         if (RandomTileNum <= 40)
         {
-            return ObjectList[0];
+            return new Cell(Cell.type.Ground);
         }
         else if (RandomTileNum <= 60)
         {
-            return ObjectList[1];
+            return new Cell(Cell.type.Ground1);
         }
         else if (RandomTileNum <= 80)
         {
-            return ObjectList[2];
+            return new Cell(Cell.type.Ground2);
         }
         else if (RandomTileNum <= 100)
         {
-            return ObjectList[3];
+            return new Cell(Cell.type.Ground3);
         }
 
         return null;
@@ -165,7 +180,7 @@ public class TerrainGeneration : MonoBehaviour
         return false;
     }
 
-    private void GenerateTrees(Cell[,] grid)
+    private void GenerateFoliage(Cell[,] grid)
     {
         float[,] noiseMap = new float[size, size];
         (float xOffset, float yOffset) = (Random.Range(-10000f, 10000f), Random.Range(-10000f, 10000f));
@@ -177,7 +192,7 @@ public class TerrainGeneration : MonoBehaviour
                 noiseMap[x, y] = noiseValue;
             }
         }
-
+        foliage = new List<Foliage>();
         for (int y = 0; y < size; y++)
         {
             for (int x = 0; x < size; x++)
@@ -197,6 +212,8 @@ public class TerrainGeneration : MonoBehaviour
                         {
                             Destroy(tree);
                         }
+                        Foliage treeData = new Foliage(Foliage.typeOfFoliage.Tree, tree.transform.position.x, tree.transform.position.y, tree.transform.position.z);
+                        foliage.Add(treeData);
                     }
 
                     float R = Random.Range(0f, RockDensity);
@@ -211,6 +228,8 @@ public class TerrainGeneration : MonoBehaviour
                         {
                             Destroy(rock);
                         }
+                        Foliage rockData = new Foliage(Foliage.typeOfFoliage.Rock, rock.transform.position.x, rock.transform.position.y, rock.transform.position.z);
+                        foliage.Add(rockData);
                     }
 
                     float F = Random.Range(0f, FlowerDensity);
@@ -225,9 +244,38 @@ public class TerrainGeneration : MonoBehaviour
                         {
                             Destroy(flower);
                         }
+                        Foliage flowerData = new Foliage(Foliage.typeOfFoliage.Flower, flower.transform.position.x, flower.transform.position.y, flower.transform.position.z);
+                        foliage.Add(flowerData);
                     }
 
                 }
+            }
+        }
+    }
+
+    private void LoadFoliage(List<Foliage> foliages)
+    {
+        foreach (Foliage foliageData in foliages)
+        {
+            if (foliageData.CurrentType == Foliage.typeOfFoliage.Tree)
+            {
+                GameObject prefab = treePrefab;
+                GameObject tree = Instantiate(prefab, new Vector3(foliageData.pos[0], foliageData.pos[1], foliageData.pos[2]), Quaternion.identity);
+                tree.transform.parent = m_TerrainHolder.transform;
+            }
+
+            if (foliageData.CurrentType == Foliage.typeOfFoliage.Rock)
+            {
+                GameObject rockprefab = RockPrefab;
+                GameObject rock = Instantiate(rockprefab, new Vector3(foliageData.pos[0], foliageData.pos[1], foliageData.pos[2]), Quaternion.identity);
+                rock.transform.parent = m_TerrainHolder.transform;
+            }
+
+            if (foliageData.CurrentType == Foliage.typeOfFoliage.Flower)
+            {
+                GameObject floweprefab = FlowerPrefab;
+                GameObject flower = Instantiate(floweprefab, new Vector3(foliageData.pos[0], foliageData.pos[1], foliageData.pos[2]), Quaternion.identity);
+                flower.transform.parent = m_TerrainHolder.transform;
             }
         }
     }
@@ -249,5 +297,6 @@ public class TerrainGeneration : MonoBehaviour
         }
 
         DrawTerrainObject(SavedGrid);
+        LoadFoliage(savedFoliage);
     }
 }
