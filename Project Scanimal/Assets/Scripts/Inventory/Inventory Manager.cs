@@ -17,6 +17,9 @@ public class InventoryManager : MonoBehaviour
     public InventorySlot[] inventorSlots;
     public GameObject inventoryItemPrefab;
 
+    public List<InventorySave> invItems;
+    public List<InventorySave> savedInvItems;
+
     private int selectedSlot = -1;
 
     private void Awake()
@@ -25,7 +28,9 @@ public class InventoryManager : MonoBehaviour
     }
 
     private void Start()
-    {
+    { 
+        invItems = new List<InventorySave>();
+        savedInvItems = new List<InventorySave>();
         foreach (var item in startItem)
         {
             AddItem(item);
@@ -102,5 +107,55 @@ public class InventoryManager : MonoBehaviour
             return item;
         }
         return null;
+    }
+
+    private void WipeInventory()
+    {
+        for (int i = 0; i < inventorSlots.Length; i++)
+        {
+            InventorySlot slot = inventorSlots[i];
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+            if (itemInSlot != null)
+            {
+                ItemSO item = itemInSlot.item;
+                Destroy(itemInSlot.gameObject);
+            }
+        }
+    }
+
+    public void SaveInv()
+    {
+        for (int i = 0; i < inventorSlots.Length; i++)
+        {
+            InventorySlot slot = inventorSlots[i];
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+            if (itemInSlot != null)
+            {
+                ItemSO itemobject = itemInSlot.item;
+                InventorySave invData = new InventorySave(itemobject.name.ToString(), itemInSlot.count);
+                invItems.Add(invData);
+            }
+        }
+    }
+
+    public void LoadInv()
+    {
+        WipeInventory();
+        foreach (InventorySave invItem in savedInvItems)
+        {
+            if (invItem.ItemAmount > 1)
+            {
+                for (int i = 0; i < invItem.ItemAmount; i++)
+                {
+                    ItemSO currentItem = Resources.Load<ItemSO>("ItemSO/" + invItem.itemSoName);
+                    AddItem(currentItem);
+                }
+            }
+            else
+            {
+                ItemSO currentItem = Resources.Load<ItemSO>("ItemSO/" + invItem.itemSoName);
+                AddItem(currentItem);
+            }
+        }
     }
 }

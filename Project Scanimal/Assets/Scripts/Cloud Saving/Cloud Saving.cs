@@ -42,6 +42,19 @@ public class CloudSaving : MonoBehaviour
         await CloudSaveService.Instance.Data.ForceSaveAsync(ItemsData);
     }
 
+    public async void SaveInvData()
+    {
+        GameObject invManager = GameObject.Find("InvManager");
+        InventoryManager invItemsMan = invManager.GetComponent<InventoryManager>();
+
+        invItemsMan.SaveInv();
+
+        var ItemsData = new Dictionary<string, object> { { "InvItemsData", invItemsMan.invItems } };
+        await CloudSaveService.Instance.Data.ForceSaveAsync(ItemsData);
+    }
+
+
+    //Load From Cloud
     public async void LoadMapData()
     {
         GameObject terrainGen = GameObject.Find("Terrain Generator");
@@ -84,8 +97,24 @@ public class CloudSaving : MonoBehaviour
             Debug.Log("key not found");
         }
 
+        GameObject invManager = GameObject.Find("InvManager");
+        InventoryManager invItemsMan = invManager.GetComponent<InventoryManager>();
+
+        var invItemsQuery = await CloudSaveService.Instance.Data.LoadAsync(new HashSet<string> { "InvItemsData" });
+        if (invItemsQuery.ContainsKey("InvItemsData"))
+        {
+            var stringData = invItemsQuery["InvItemsData"];
+            var deserialized = JsonConvert.DeserializeObject<List<InventorySave>>(stringData);
+            invItemsMan.savedInvItems = deserialized;
+        }
+        else
+        {
+            Debug.Log("key not found");
+        }
+
 
         genarator.LoadSavedMap();
         placedItems.LoadItems();
+        invItemsMan.LoadInv();
     }
 }
