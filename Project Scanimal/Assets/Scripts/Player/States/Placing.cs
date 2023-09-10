@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using static PlayerStateManager;
 
@@ -17,9 +18,9 @@ public class Placing : MonoBehaviour
     private GameObject Player;
     private bool stateEnabled;
     private bool spawnTempObject;
-
     private Renderer[] renderers;
-    private InputManager inputManager;
+    private PlacedItemsManager placedItemsManager;
+    public GameObject TerrainHolder;
 
     private void OnEnable()
     {
@@ -38,7 +39,7 @@ public class Placing : MonoBehaviour
         stateEnabled = false;
         objectToPlace = null;
         spawnTempObject = false;
-        inputManager = InputManager.Instance;
+        placedItemsManager = GameObject.Find("Terrain Generator").GetComponent<PlacedItemsManager>();
     }
 
     private void Update()
@@ -153,7 +154,10 @@ public class Placing : MonoBehaviour
     {
         GameObject PlacedObject = objectToPlace.gameObject;
         PlacedObject = Instantiate(objectToPlace, new Vector3(tempObject.transform.position.x, 0, tempObject.transform.position.z), Quaternion.identity);
+        PlacedObject.transform.parent = TerrainHolder.transform;
         InventoryManager.Instance.GetSelectedItem(true);
+        PlacedItems itemData = new PlacedItems(objectToPlace.name, PlacedObject.transform.position.x, PlacedObject.transform.position.y, PlacedObject.transform.position.z);
+        placedItemsManager.placedItems.Add(itemData);
         yield return new WaitForSeconds(0.1f);
         OnStateChange?.Invoke();
         StopCoroutine(SpawnObject());

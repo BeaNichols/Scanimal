@@ -4892,6 +4892,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 632121161}
+        m_TargetAssemblyTypeName: CloudSaving, Assembly-CSharp
+        m_MethodName: SaveItemData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1314964428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7058,6 +7070,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2033726516}
   - component: {fileID: 2033726517}
+  - component: {fileID: 2033726518}
   m_Layer: 0
   m_Name: Terrain Generator
   m_TagString: Untagged
@@ -7109,6 +7122,18 @@ MonoBehaviour:
   treeDensity: 0.7
   RockDensity: 0.45
   FlowerDensity: 0.9
+--- !u!114 &2033726518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033726515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbc8b86791bb4d849af1799528d61717, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2080302230
 GameObject:
   m_ObjectHideFlags: 0
@@ -7633,6 +7658,10 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 1450731449}
+    - target: {fileID: 3403358054259988887, guid: 1d2cac55975c08a428bdc59d66427b32, type: 3}
+      propertyPath: TerrainHolder
+      value: 
+      objectReference: {fileID: 1351516023}
     - target: {fileID: 3488632131588307518, guid: 1d2cac55975c08a428bdc59d66427b32, type: 3}
       propertyPath: m_Layer
       value: 0
