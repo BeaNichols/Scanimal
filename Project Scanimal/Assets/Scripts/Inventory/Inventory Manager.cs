@@ -117,6 +117,7 @@ public class InventoryManager : MonoBehaviour
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
             if (itemInSlot != null)
             {
+                itemInSlot.count = 0;
                 ItemSO item = itemInSlot.item;
                 Destroy(itemInSlot.gameObject);
             }
@@ -125,6 +126,7 @@ public class InventoryManager : MonoBehaviour
 
     public void SaveInv()
     {
+        invItems.Clear();
         for (int i = 0; i < inventorSlots.Length; i++)
         {
             InventorySlot slot = inventorSlots[i];
@@ -141,6 +143,7 @@ public class InventoryManager : MonoBehaviour
     public void LoadInv()
     {
         WipeInventory();
+
         foreach (InventorySave invItem in savedInvItems)
         {
             if (invItem.ItemAmount > 1)

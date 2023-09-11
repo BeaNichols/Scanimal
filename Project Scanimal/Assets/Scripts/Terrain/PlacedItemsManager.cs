@@ -7,7 +7,7 @@ public class PlacedItemsManager : MonoBehaviour
 {
     public List<PlacedItems> placedItems;
     public List<PlacedItems> savedPlacedItems;
-    public GameObject terrainHolder;
+    public GameObject itemHolder;
 
     private void Start()
     {
@@ -20,7 +20,7 @@ public class PlacedItemsManager : MonoBehaviour
         {
             GameObject prefab = Resources.Load<GameObject>("Prefabs/" + itemData.prefabName);
             var placed = Instantiate(prefab, new Vector3(itemData.pos[0], itemData.pos[1], itemData.pos[2]),Quaternion.identity);
-            placed.transform.parent = terrainHolder.transform;
+            placed.transform.parent = itemHolder.transform;
         }
     }
 }

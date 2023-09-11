@@ -29,6 +29,8 @@ public class CloudSaving : MonoBehaviour
         GameObject terrainGen = GameObject.Find("Terrain Generator");
         TerrainGeneration genarator = terrainGen.GetComponent<TerrainGeneration>();
 
+        genarator.SaveFoliage();
+
         var foliageData = new Dictionary<string, object> { { "FoliageData", genarator.foliage } };
         await CloudSaveService.Instance.Data.ForceSaveAsync(foliageData);
     }

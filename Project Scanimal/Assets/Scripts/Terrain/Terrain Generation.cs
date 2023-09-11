@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.WSA;
 
 public class TerrainGeneration : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class TerrainGeneration : MonoBehaviour
     public GameObject Beach;
     public GameObject PlayerSpawnTile;
     [SerializeField] private GameObject m_TerrainHolder;
+    [SerializeField] private GameObject m_FoliageHolder;
+    [SerializeField] private GameObject m_ItemHolder;
     [SerializeField] private GameObject treePrefab;
     [SerializeField] private GameObject RockPrefab;
     [SerializeField] private GameObject FlowerPrefab;
@@ -192,7 +195,6 @@ public class TerrainGeneration : MonoBehaviour
                 noiseMap[x, y] = noiseValue;
             }
         }
-        foliage = new List<Foliage>();
         for (int y = 0; y < size; y++)
         {
             for (int x = 0; x < size; x++)
@@ -206,14 +208,12 @@ public class TerrainGeneration : MonoBehaviour
                         GameObject prefab = treePrefab;
                         GameObject tree = Instantiate(prefab, transform);
                         tree.transform.position = new Vector3(x + Random.Range(-0.5f, 0.5f), 0.25f, y + Random.Range(-0.5f, .5f));
-                        tree.transform.parent = m_TerrainHolder.transform;
+                        tree.transform.parent = m_FoliageHolder.transform;
                         WorldOverlayController treeCon = tree.GetComponent<WorldOverlayController>();
                         if (treeCon.colliding)
                         {
                             Destroy(tree);
                         }
-                        Foliage treeData = new Foliage(Foliage.typeOfFoliage.Tree, tree.transform.position.x, tree.transform.position.y, tree.transform.position.z);
-                        foliage.Add(treeData);
                     }
 
                     float R = Random.Range(0f, RockDensity);
@@ -222,14 +222,12 @@ public class TerrainGeneration : MonoBehaviour
                         GameObject prefab = RockPrefab;
                         GameObject rock = Instantiate(prefab, transform);
                         rock.transform.position = new Vector3(x + Random.Range(-0.5f, 0.5f), 0, y + Random.Range(-0.5f, .5f));
-                        rock.transform.parent = m_TerrainHolder.transform;
+                        rock.transform.parent = m_FoliageHolder.transform;
                         WorldOverlayController rockCon = rock.GetComponent<WorldOverlayController>();
                         if (rockCon.colliding)
                         {
                             Destroy(rock);
                         }
-                        Foliage rockData = new Foliage(Foliage.typeOfFoliage.Rock, rock.transform.position.x, rock.transform.position.y, rock.transform.position.z);
-                        foliage.Add(rockData);
                     }
 
                     float F = Random.Range(0f, FlowerDensity);
@@ -238,17 +236,38 @@ public class TerrainGeneration : MonoBehaviour
                         GameObject prefab = FlowerPrefab;
                         GameObject flower = Instantiate(prefab, transform);
                         flower.transform.position = new Vector3(x + Random.Range(-0.5f, 0.5f), 0, y + Random.Range(-0.5f, .5f));
-                        flower.transform.parent = m_TerrainHolder.transform;
+                        flower.transform.parent = m_FoliageHolder.transform;
                         WorldOverlayController flowerCon = flower.GetComponent<WorldOverlayController>();
                         if (flowerCon.colliding)
                         {
                             Destroy(flower);
                         }
-                        Foliage flowerData = new Foliage(Foliage.typeOfFoliage.Flower, flower.transform.position.x, flower.transform.position.y, flower.transform.position.z);
-                        foliage.Add(flowerData);
                     }
 
                 }
+            }
+        }
+    }
+
+    public void SaveFoliage()
+    {
+        foliage = new List<Foliage>();
+        foreach (Transform child in m_FoliageHolder.transform)
+        {
+            if (child.gameObject.tag == "Tree")
+            {
+                Foliage treeData = new Foliage(Foliage.typeOfFoliage.Tree, child.transform.position.x, child.transform.position.y, child.transform.position.z);
+                foliage.Add(treeData);
+            }
+            else if (child.gameObject.tag == "Rock")
+            {
+                Foliage rockData = new Foliage(Foliage.typeOfFoliage.Rock, child.transform.position.x, child.transform.position.y, child.transform.position.z);
+                foliage.Add(rockData);
+            }
+            else if (child.gameObject.tag == "Flower")
+            {
+                Foliage flowerData = new Foliage(Foliage.typeOfFoliage.Flower, child.transform.position.x, child.transform.position.y, child.transform.position.z);
+                foliage.Add(flowerData);
             }
         }
     }
@@ -261,21 +280,21 @@ public class TerrainGeneration : MonoBehaviour
             {
                 GameObject prefab = treePrefab;
                 GameObject tree = Instantiate(prefab, new Vector3(foliageData.pos[0], foliageData.pos[1], foliageData.pos[2]), Quaternion.identity);
-                tree.transform.parent = m_TerrainHolder.transform;
+                tree.transform.parent = m_FoliageHolder.transform;
             }
 
             if (foliageData.CurrentType == Foliage.typeOfFoliage.Rock)
             {
                 GameObject rockprefab = RockPrefab;
                 GameObject rock = Instantiate(rockprefab, new Vector3(foliageData.pos[0], foliageData.pos[1], foliageData.pos[2]), Quaternion.identity);
-                rock.transform.parent = m_TerrainHolder.transform;
+                rock.transform.parent = m_FoliageHolder.transform;
             }
 
             if (foliageData.CurrentType == Foliage.typeOfFoliage.Flower)
             {
                 GameObject floweprefab = FlowerPrefab;
                 GameObject flower = Instantiate(floweprefab, new Vector3(foliageData.pos[0], foliageData.pos[1], foliageData.pos[2]), Quaternion.identity);
-                flower.transform.parent = m_TerrainHolder.transform;
+                flower.transform.parent = m_FoliageHolder.transform;
             }
         }
     }
@@ -283,6 +302,16 @@ public class TerrainGeneration : MonoBehaviour
     public void OnClickRegenTerrain()
     {
         foreach (Transform child in m_TerrainHolder.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (Transform child in m_FoliageHolder.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (Transform child in m_ItemHolder.transform)
         {
             Destroy(child.gameObject);
         }
@@ -296,6 +325,10 @@ public class TerrainGeneration : MonoBehaviour
             Destroy(child.gameObject);
         }
 
+        foreach (Transform child in m_FoliageHolder.transform)
+        {
+            Destroy(child.gameObject);
+        }
         DrawTerrainObject(SavedGrid);
         LoadFoliage(savedFoliage);
     }
