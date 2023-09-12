@@ -99,7 +99,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec08f1717a91faf4489af863f30e49e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldCanvas: {fileID: 0}
   ItemDrop: {fileID: 11400000, guid: 2b6bdc81b6d47dc4c8b3176b9fe02c71, type: 2}
   colliding: 0
 --- !u!54 &-5026356811872597243

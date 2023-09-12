@@ -12,6 +12,8 @@ public class CloudSaving : MonoBehaviour
     public async void Start()
     {
         await UnityServices.InitializeAsync();
+
+        LoadMapData();
     }
 
     public async void SaveMapData()
@@ -39,6 +41,8 @@ public class CloudSaving : MonoBehaviour
     {
         GameObject terrainGen = GameObject.Find("Terrain Generator");
         PlacedItemsManager placedItems = terrainGen.GetComponent<PlacedItemsManager>();
+
+        placedItems.SaveItems();
 
         var ItemsData = new Dictionary<string, object> { { "PlacedItemsData", placedItems.placedItems } };
         await CloudSaveService.Instance.Data.ForceSaveAsync(ItemsData);

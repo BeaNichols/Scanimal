@@ -59,15 +59,21 @@ public class Breaking : MonoBehaviour
         }
         else
         {
+            if (Raycast())
+            {
+                var worldController = currentObject.GetComponent<WorldOverlayController>();
+                worldController.DisableCanvas();
+            }
             stateEnabled = false;
         }
     }
 
     private void BreakMode()
     {
+        WorldOverlayController worldController;
         if (Raycast())
         {
-            var worldController = currentObject.GetComponent<WorldOverlayController>();
+            worldController = currentObject.GetComponent<WorldOverlayController>();
             if (worldController != null) 
             {
                 worldController.EnableCanvas();

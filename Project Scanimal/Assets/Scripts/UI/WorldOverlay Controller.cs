@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class WorldOverlayController : MonoBehaviour
 {
+    [SerializeField]
     private Canvas worldCanvas;
     public ItemSO ItemDrop;
 
@@ -36,12 +37,19 @@ public class WorldOverlayController : MonoBehaviour
 
     public void DisableCanvas() 
     {
-        worldCanvas.gameObject.SetActive(false);
+        if (worldCanvas == null)
+        {
+            return;
+        }
+        else
+        {
+            worldCanvas.gameObject.SetActive(false);
+        }
     }
 
     void OnCollisionEnter(Collision collisionInfo)
     {
-        if (collisionInfo.gameObject.tag == "Item")
+        if (collisionInfo.gameObject.tag == "Item" || collisionInfo.gameObject.tag == "Tree" || collisionInfo.gameObject.tag == "Rock" || collisionInfo.gameObject.tag == "Flower")
         { 
             colliding = true;
         }
@@ -49,7 +57,7 @@ public class WorldOverlayController : MonoBehaviour
 
     void OnCollisionExit(Collision collisionInfo)
     {
-        if (collisionInfo.gameObject.tag == "Item")
+        if (collisionInfo.gameObject.tag == "Item" || collisionInfo.gameObject.tag == "Tree" || collisionInfo.gameObject.tag == "Rock" || collisionInfo.gameObject.tag == "Flower")
         {
             colliding = false;
         }
@@ -57,7 +65,7 @@ public class WorldOverlayController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Item")
+        if (other.gameObject.tag == "Item" || other.gameObject.tag == "Tree" || other.gameObject.tag == "Rock" || other.gameObject.tag == "Flower")
         {
             colliding = true;
         }
@@ -65,7 +73,7 @@ public class WorldOverlayController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Item")
+        if (other.gameObject.tag == "Item" || other.gameObject.tag == "Tree" || other.gameObject.tag == "Rock" || other.gameObject.tag == "Flower")
         {
             colliding = false;
         }

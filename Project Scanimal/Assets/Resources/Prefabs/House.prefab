@@ -331,7 +331,7 @@ GameObject:
   - component: {fileID: 5914742020686836420}
   m_Layer: 0
   m_Name: House
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -441,6 +441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec08f1717a91faf4489af863f30e49e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldCanvas: {fileID: 6120046893288495558}
   ItemDrop: {fileID: 11400000, guid: 6d3f7b0a81880e5468936444c51dc5f4, type: 2}
   colliding: 0
 --- !u!65 &5914742020686836420
@@ -453,7 +454,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0

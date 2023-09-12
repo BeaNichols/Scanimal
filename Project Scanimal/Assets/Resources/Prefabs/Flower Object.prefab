@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: ItemDrop
       value: 
       objectReference: {fileID: 11400000, guid: c8fb3e9b5aa212644b912cc97ea6ddf3, type: 2}
+    - target: {fileID: 6782661664918465892, guid: d9fa2853e5a8aa44f82bce030e048964, type: 3}
+      propertyPath: worldCanvas
+      value: 
+      objectReference: {fileID: 4440056137173626440}
     - target: {fileID: 7342418367498220677, guid: d9fa2853e5a8aa44f82bce030e048964, type: 3}
       propertyPath: m_Size.x
       value: 0.2
@@ -75,6 +79,10 @@ PrefabInstance:
     - target: {fileID: 7342418367498220677, guid: d9fa2853e5a8aa44f82bce030e048964, type: 3}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7342418367498220677, guid: d9fa2853e5a8aa44f82bce030e048964, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 7375074015387840802, guid: d9fa2853e5a8aa44f82bce030e048964, type: 3}
       propertyPath: m_Name
@@ -107,6 +115,11 @@ PrefabInstance:
 --- !u!4 &2913900193901759528 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2761061835467803316, guid: d9fa2853e5a8aa44f82bce030e048964, type: 3}
+  m_PrefabInstance: {fileID: 1018099207909050012}
+  m_PrefabAsset: {fileID: 0}
+--- !u!223 &4440056137173626440 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 3728765389409118420, guid: d9fa2853e5a8aa44f82bce030e048964, type: 3}
   m_PrefabInstance: {fileID: 1018099207909050012}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2295806844640805121

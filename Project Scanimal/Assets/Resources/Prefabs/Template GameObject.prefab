@@ -348,7 +348,7 @@ Transform:
   m_Children:
   - {fileID: 8971809909574789643}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &950750791352916008
 Rigidbody:
@@ -410,5 +410,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec08f1717a91faf4489af863f30e49e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldCanvas: {fileID: 3728765389409118420}
   ItemDrop: {fileID: 0}
   colliding: 0
