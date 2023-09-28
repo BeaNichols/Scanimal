@@ -14,11 +14,16 @@ public class InventoryManager : MonoBehaviour
 
     public ItemSO[] startItem;
     public int MaxStack = 5;
-    public InventorySlot[] inventorSlots;
+    public List<InventorySlot> inventorSlots;
     public GameObject inventoryItemPrefab;
 
     public List<InventorySave> invItems;
     public List<InventorySave> savedInvItems;
+
+    [SerializeField]
+    private GameObject inventory;
+    [SerializeField]
+    private GameObject inventorySlot;
 
     private int selectedSlot = -1;
 
@@ -52,7 +57,7 @@ public class InventoryManager : MonoBehaviour
     public bool AddItem(ItemSO item)
     {
         //check if item can be stacked 
-        for (int i = 0; i < inventorSlots.Length; i++)
+        for (int i = 0; i < inventorSlots.Count; i++)
         {
             InventorySlot slot = inventorSlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
@@ -64,7 +69,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
         //check got empty slot
-        for (int i = 0; i < inventorSlots.Length; i++)
+        for (int i = 0; i < inventorSlots.Count; i++)
         {
             InventorySlot slot = inventorSlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
@@ -74,6 +79,21 @@ public class InventoryManager : MonoBehaviour
                 return true;
             }
         }
+
+        for (int i = 0; i < inventorSlots.Count; i++)
+        {
+            InventorySlot slot = inventorSlots[i];
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+            if (itemInSlot != null)
+            {
+                var newSlot = Instantiate(inventorySlot, inventory.transform);
+                var slotToAdd = newSlot.GetComponent<InventorySlot>();
+                inventorSlots.Add(slotToAdd);
+                SpawnNewItem(item, slotToAdd);
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -111,7 +131,7 @@ public class InventoryManager : MonoBehaviour
 
     private void WipeInventory()
     {
-        for (int i = 0; i < inventorSlots.Length; i++)
+        for (int i = 0; i < inventorSlots.Count; i++)
         {
             InventorySlot slot = inventorSlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
@@ -127,7 +147,7 @@ public class InventoryManager : MonoBehaviour
     public void SaveInv()
     {
         invItems.Clear();
-        for (int i = 0; i < inventorSlots.Length; i++)
+        for (int i = 0; i < inventorSlots.Count; i++)
         {
             InventorySlot slot = inventorSlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
