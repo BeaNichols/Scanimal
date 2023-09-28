@@ -11,6 +11,8 @@ public class Standard : MonoBehaviour
     private float rayThickness = 1f;
 
     private bool stateEnabled;
+    private bool canInteract;
+    private bool interacting;
     private GameObject currentObject;
     private Interact interaction;
 
@@ -20,17 +22,21 @@ public class Standard : MonoBehaviour
     {
         PlayerStateManager.OnStateChange += EnableDisableState;
         SwpieDetection.OnTap += StartTap;
+        CraftingUIManager.OnCloseInteract += ResetInteraction;
     }
 
     private void OnDisable()
     {
         PlayerStateManager.OnStateChange -= EnableDisableState;
         SwpieDetection.OnTap -= StartTap;
+        CraftingUIManager.OnCloseInteract -= ResetInteraction;
     }
 
     private void Start()
     {
         stateEnabled = false;
+        canInteract = false;
+        interacting = false;
     }
 
     private void Update()
@@ -50,6 +56,7 @@ public class Standard : MonoBehaviour
         }
         else
         {
+            canInteract = false;
             stateEnabled = false;
         }
     }
@@ -96,9 +103,10 @@ public class Standard : MonoBehaviour
     {
         if (stateEnabled)
         {
-            if (CanInteract())
+            if (canInteract && !interacting)
             {
-                
+                interacting = true;
+                interaction.Interaction();
             }
         }
     }
@@ -113,6 +121,7 @@ public class Standard : MonoBehaviour
                 if (interaction != null)
                 {
                     interactCanvas.SetActive(true);
+                    canInteract = true;
                 }
             }
         }
@@ -120,14 +129,14 @@ public class Standard : MonoBehaviour
         {
             if (interaction != null)
             {
+                canInteract = false;
                 interactCanvas.SetActive(false);
             }
         }
     }
 
-    private bool CanInteract()
+    private void ResetInteraction()
     {
-
-        return false;
+        interacting = false;
     }
 }

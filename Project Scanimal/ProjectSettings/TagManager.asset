@@ -9,6 +9,7 @@ TagManager:
   - Tree
   - Rock
   - Flower
+  - Crafting
   layers:
   - Default
   - TransparentFX

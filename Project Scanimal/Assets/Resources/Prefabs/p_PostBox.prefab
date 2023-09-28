@@ -516,3 +516,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6385066c7b895bd4ea4f2925cb48829a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentInteractionType: 1
+  craftingCanvasObject: {fileID: 4413938441548796803, guid: ce466ba8430733641992b7e387d591c7, type: 3}
+  mailCanvasObject: {fileID: 4413938441548796803, guid: 9f12333a09b913e4697c4ca1f3509dad, type: 3}

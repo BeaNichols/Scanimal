@@ -63,7 +63,7 @@ public class PlayerStateManager : MonoBehaviour
         else 
         {
             currentState = PlayerState.standard;
-            inputManager.SetActive(false);
+            inputManager.SetActive(true);
         }
 
         OnStateChange?.Invoke(currentState);
