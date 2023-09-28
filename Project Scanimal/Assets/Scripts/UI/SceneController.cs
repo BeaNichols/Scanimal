@@ -50,7 +50,15 @@ public class SceneController : MonoBehaviour
 
         scene.allowSceneActivation = true;
         await Task.Delay(10);
-        loadCanvas.SetActive(false);
+        if (sceneName != "MainSceneTemp")
+        {
+            loadCanvas.SetActive(false);
+        }
+        else if (sceneName == "MainSceneTemp")
+        {
+            await Task.Delay(1000);
+            loadCanvas.SetActive(false);
+        }
     }
 
     public async void LoadSceneAdditive(string sceneName)
@@ -98,7 +106,15 @@ public class SceneController : MonoBehaviour
 
         scene.allowSceneActivation = true;
         await Task.Delay(10);
-        loadCanvas.SetActive(false);
+        if (sceneName != "MainSceneTemp")
+        {
+            loadCanvas.SetActive(false);
+        }
+        else if (sceneName == "MainSceneTemp")
+        {
+            await Task.Delay(1000);
+            loadCanvas.SetActive(false);
+        }
     }
 
     private void Update()
