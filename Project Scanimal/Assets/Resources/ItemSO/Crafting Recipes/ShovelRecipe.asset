@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31ca03906da13c24d85b6fee7f512d4a, type: 3}
+  m_Name: ShovelRecipe
+  m_EditorClassIdentifier: 
+  itemToCraft: {fileID: 11400000, guid: c93f12e4c4212bb47abc45560cca926c, type: 2}
+  items:
+  - {fileID: 11400000, guid: 3ddf4cd5efd76624e90ebb66342ff635, type: 2}
+  - {fileID: 11400000, guid: 2b44878a36b2ce048952ab158d3f82a7, type: 2}
+  Amount: 0200000001000000

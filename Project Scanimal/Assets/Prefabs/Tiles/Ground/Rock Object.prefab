@@ -55,7 +55,7 @@ PrefabInstance:
     - target: {fileID: 6782661664918465892, guid: d9fa2853e5a8aa44f82bce030e048964, type: 3}
       propertyPath: ItemDrop
       value: 
-      objectReference: {fileID: 11400000, guid: b4b7eefcb8e4c0548b1f73a5ad21a4a4, type: 2}
+      objectReference: {fileID: 11400000, guid: 2b44878a36b2ce048952ab158d3f82a7, type: 2}
     - target: {fileID: 7342418367498220677, guid: d9fa2853e5a8aa44f82bce030e048964, type: 3}
       propertyPath: m_Size.x
       value: 0.24711208

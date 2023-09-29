@@ -442,7 +442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldCanvas: {fileID: 6120046893288495558}
-  ItemDrop: {fileID: 11400000, guid: 6d3f7b0a81880e5468936444c51dc5f4, type: 2}
+  ItemDrop: {fileID: 11400000, guid: aa78e687180021944abd349bf596e1ee, type: 2}
   colliding: 0
 --- !u!65 &5914742020686836420
 BoxCollider:

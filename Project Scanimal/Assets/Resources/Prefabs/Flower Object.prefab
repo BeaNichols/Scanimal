@@ -55,7 +55,7 @@ PrefabInstance:
     - target: {fileID: 6782661664918465892, guid: d9fa2853e5a8aa44f82bce030e048964, type: 3}
       propertyPath: ItemDrop
       value: 
-      objectReference: {fileID: 11400000, guid: c8fb3e9b5aa212644b912cc97ea6ddf3, type: 2}
+      objectReference: {fileID: 11400000, guid: ae0b335836c97464293de8bb00db8618, type: 2}
     - target: {fileID: 6782661664918465892, guid: d9fa2853e5a8aa44f82bce030e048964, type: 3}
       propertyPath: worldCanvas
       value: 

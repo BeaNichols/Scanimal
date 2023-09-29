@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8867177d3be1db74aa5f2c7b16be00bb, type: 3}
-  m_Name: Pick
+  m_Script: {fileID: 11500000, guid: 31ca03906da13c24d85b6fee7f512d4a, type: 3}
+  m_Name: HouseRecipe
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: 908d7f991ac02774c8576ddbd965e3d4, type: 3}
-  type: 1
-  actionType: 1
-  stackable: 1
+  itemToCraft: {fileID: 11400000, guid: aa78e687180021944abd349bf596e1ee, type: 2}
+  items:
+  - {fileID: 11400000, guid: 3ddf4cd5efd76624e90ebb66342ff635, type: 2}
+  Amount: 0a000000

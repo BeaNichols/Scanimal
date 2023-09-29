@@ -10,6 +10,7 @@ TagManager:
   - Rock
   - Flower
   - Crafting
+  - RecipeHolder
   layers:
   - Default
   - TransparentFX

@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldCanvas: {fileID: 0}
-  ItemDrop: {fileID: 11400000, guid: 2b6bdc81b6d47dc4c8b3176b9fe02c71, type: 2}
+  ItemDrop: {fileID: 11400000, guid: 3ddf4cd5efd76624e90ebb66342ff635, type: 2}
   colliding: 0
 --- !u!54 &-5026356811872597243
 Rigidbody:
