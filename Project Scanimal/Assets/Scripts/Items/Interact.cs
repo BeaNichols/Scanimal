@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.PlasticSCM.Editor.WebApi;
-using UnityEditor.Build.Content;
 using UnityEngine;
 
 public class Interact : MonoBehaviour
