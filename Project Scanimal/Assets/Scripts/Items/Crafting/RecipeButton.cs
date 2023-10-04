@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 public class RecipeButton : MonoBehaviour
 {
+    #region Events
+    public delegate void CurrentItemToCraft(RecipeSo currentItem);
+    public static event CurrentItemToCraft OnSwitchItem;
+    #endregion
+
     public RecipeSo item;
     private Image objectImage;
     [SerializeField]
@@ -16,14 +21,11 @@ public class RecipeButton : MonoBehaviour
         objectImage = GetComponent<Image>();
         objectImage.sprite = item.itemToCraft.image;
         recipes = GameObject.FindGameObjectsWithTag("RecipeHolder");
-        //foreach (var recipe in recipes)
-        //{ 
-        //    recipe.SetActive(false);
-        //}
     }
 
     public void OnClickDisplay()
     {
+        OnSwitchItem?.Invoke(item);
         foreach (var recipe in recipes)
         {
             recipe.SetActive(false);
